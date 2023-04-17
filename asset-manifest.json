@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/portaria-294/static/css/main.baec8f1f.css",
+    "main.js": "/portaria-294/static/js/main.df35f07a.js",
+    "index.html": "/portaria-294/index.html",
+    "main.baec8f1f.css.map": "/portaria-294/static/css/main.baec8f1f.css.map",
+    "main.df35f07a.js.map": "/portaria-294/static/js/main.df35f07a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.baec8f1f.css",
+    "static/js/main.df35f07a.js"
+  ]
+}
