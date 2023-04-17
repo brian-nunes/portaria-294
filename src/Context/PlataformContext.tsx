@@ -64,8 +64,7 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       const ks = process.env.REACT_APP_K_POR_LOTE?.split(",") || [];
 
       const _multiplier = dimension === Dimensions.C ? 1 : (dimension === Dimensions.CL ? 2: 3)
-      
-
+        
       const index: number = faixas.indexOf(faixaLote);
       setMultiplier(_multiplier);
       setSample(+_sample[index] * multiplier);
