@@ -14,7 +14,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainContainer">
-        <h1>Bem-vindo a plataforma da Portaria nº 294</h1>
+        <h1>Plataforma - Portaria nº 294</h1>
         <div className="centralContainer">
           {step === Steps.AskDimensions && <DimensionsBox/>}
           {step === Steps.AskNominal && <NominalBox/>}
