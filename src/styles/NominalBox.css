@@ -1,0 +1,79 @@
+.nominalBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nominalBox__h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+  }
+  
+  .nominalBox__inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin: 0;
+  }
+  
+  .nominalBox__input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .invalid {
+    border-color: red;
+  }
+  
+  .nominalBox__note {
+    margin-top: 1rem;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .nominalBox__button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    height: fit-content;
+  }
+  
+  .nominalBox__button--prev {
+    margin-right: auto;
+    background-color: #888;
+  }
+  
+  .nominalBox__button--next {
+    margin-left: auto;
+  }
+
+  .navButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .msg_erro {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #ff0000;
+    text-align: center;
+    margin: 0;
+    padding: 0.2rem;
+  }
+  

@@ -1,0 +1,202 @@
+.measuresBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    padding: 1rem;
+  }
+  
+  .measuresBox__h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+  }
+  
+  .measuresBox__options {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    flex-wrap: wrap;
+    height: 10rem;
+    align-content: space-around;
+    justify-content: flex-start;
+    text-align: center; 
+  }
+  
+  .measuresBox__options label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .measuresBox__options input[type="radio"] {
+    display: none;
+  }
+  
+  .measuresBox__options .measuresBox__radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    padding: 5px 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .measuresBox__options .measuresBox__radio:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .measuresBox__options input[type="radio"]:checked + .measuresBox__radio {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  .measuresBox__options .measuresBox__radio:hover,
+  .measuresBox__options input[type="radio"]:checked + .measuresBox__radio {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .measuresBox__options input[type="radio"]:checked + .measuresBox__radio {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .measuresBox__options input[type="radio"]:checked + .measuresBox__radio::before {
+    content: "\2713";
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 5px;
+  }
+  
+  .measuresBox__input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .measuresBox__label {
+    font-size: 1.2rem;
+    padding: 1rem;
+    white-space: nowrap;
+  }
+  
+  .invalid {
+    border-color: red;
+  }
+  
+  .measuresBox__note {
+    margin-top: 1rem;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .measuresBox__button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    height: fit-content;
+}
+
+.measuresBox__or {
+    padding: 1rem;
+    font-size: 1.2rem;
+    margin: 0;
+    font-style: normal;
+}
+
+.measuresBox__textarea {
+    width: 100%;
+    height: 5rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+  
+.valid {
+  border-color: rgb(94, 185, 94);
+}
+
+.invalid {
+  border-color: red;
+}
+
+.measuresBox__inputFile {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    margin: 0;
+}
+  
+.measuresBox__inputFile:focus,
+.measuresBox__inputFile:hover {
+    outline: none;
+    border-color: #007bff;
+}
+  
+  
+.measuresBox__button--prev {
+  margin-right: auto;
+  background-color: #888;
+}
+  
+.measuresBox__button--next {
+    margin-left: auto;
+}
+  
+.navButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+  
+.msg_erro {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #ff0000;
+    text-align: center;
+    margin: 0;
+    padding: 1rem;
+}
