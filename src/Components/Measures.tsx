@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { PlataformContext } from '../Context/PlataformContext';
 import Steps from '../Enums/Steps';
 import '../styles/Measures.css';
+import HelpButton from './HelpButton';
 
 const Measures: React.FC = () => {
   const { setStep, sample, setMeasures, multiplier } = useContext(PlataformContext);
@@ -125,7 +126,8 @@ const Measures: React.FC = () => {
       {(nextClicked && errorMessage !== "") && <p className="msg_erro">{errorMessage}</p>}
       <div className="navButtons">
         <button className="measuresBox__button measuresBox__button--prev" onClick={handlePrevius}>Anterior</button>
-        <button className="measuresBox__button measuresBox__button--next" onClick={handleValidate}>{!validated ? "Visualizar" : "Próximo"}</button>
+        <HelpButton/>
+        <button className="measuresBox__button measuresBox__button--next" onClick={handleValidate}>{!validated ? "Validar" : "Finalizar"}</button>
       </div>
     </div>
   );

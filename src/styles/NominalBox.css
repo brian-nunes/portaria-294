@@ -66,6 +66,9 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
   }
 
   .msg_erro {

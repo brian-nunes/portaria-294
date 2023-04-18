@@ -3,6 +3,7 @@ import '../styles/NominalBox.css';
 import Dimensions from '../Enums/Dimensions';
 import { PlataformContext } from '../Context/PlataformContext';
 import Steps from '../Enums/Steps';
+import HelpButton from './HelpButton';
 
 const NominalBox: React.FC = () => {
   const { dimension, setStep, setMeasuresNominal, measuresNominal } = useContext(PlataformContext);
@@ -62,6 +63,7 @@ const handleValidation = (inputs: NodeListOf<Element>) => {
       <p className="nominalBox__note">Obs.: Não se preocupe com a unidade de medida, apenas garanta que está usando a mesma para todos os dados informados!</p>
       <div className="navButtons">
         <button className="nominalBox__button nominalBox__button--prev" onClick={handlePrevius}>Anterior</button>
+        <HelpButton/>
         <button className="nominalBox__button nominalBox__button--next" onClick={handleNext}>Próximo</button>
       </div>
     </div>

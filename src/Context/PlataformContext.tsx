@@ -4,7 +4,7 @@ import Dimensions from "../Enums/Dimensions";
 
 export interface PlataformContextType {
   step: Steps;
-  dimension: Dimensions;
+  dimension: Dimensions | undefined;
   measures: number[][];
   measuresNominal: number[];
   faixaLote: string;
@@ -24,7 +24,7 @@ export interface PlataformContextType {
 
 export const PlataformContext = createContext<PlataformContextType>({
   step: Steps.AskDimensions,
-  dimension: Dimensions.C,
+  dimension: undefined,
   measures: [],
   measuresNominal: [],
   faixaLote: '',
@@ -48,7 +48,7 @@ interface PlataformProviderProps {
   
 export const PlataformProvider = ({ children }: PlataformProviderProps) => {
     const [step, setStep] = useState<Steps>(Steps.AskDimensions);
-    const [dimension, setDimension] = useState<Dimensions>(Dimensions.C);
+    const [dimension, setDimension] = useState<Dimensions | undefined>(undefined);
     const [measures, setMeasures] = useState<number[][]>([]);
     const [measuresNominal, setMeasuresNominal] = useState<number[]>([]);
     const [faixaLote, setFaixaLote] = useState<string>('');
@@ -71,6 +71,23 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       setK(+ks[index]);
       // eslint-disable-next-line 
     }, [faixaLote, dimension]);
+
+    useEffect(() => {
+      setMeasures([]);
+      setMeasuresNominal([]);
+      setFaixaLote('');
+      setImprecision(0);
+    }, [dimension]);
+
+    useEffect(() => {
+      setMeasures([]);
+      setFaixaLote('');
+      setImprecision(0);
+    }, [setMeasuresNominal]);
+
+    useEffect(() => {
+      setMeasures([]);
+    }, [imprecision, faixaLote]);
 
     function calculateAverage(numbers: number[]): number {
       const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);

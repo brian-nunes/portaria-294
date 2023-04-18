@@ -1,0 +1,12 @@
+.HelpButton {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 80%;
+    border-width: 10px;
+    border-color: rgb(255, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+    background-color: #8f8f8f
+  }

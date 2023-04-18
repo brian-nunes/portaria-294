@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { PlataformContext } from '../Context/PlataformContext';
 import Steps from '../Enums/Steps';
 import '../styles/AdditionalData.css';
+import HelpButton from './HelpButton';
 
 const AdditionalData: React.FC = () => {
   const { setStep, setFaixaLote, setImprecision, faixaLote, imprecision } = useContext(PlataformContext);
@@ -72,6 +73,7 @@ const AdditionalData: React.FC = () => {
       </div>
       <div className="navButtons">
         <button className="nominalBox__button nominalBox__button--prev" onClick={handlePrevius}>Anterior</button>
+        <HelpButton/>
         <button className="nominalBox__button nominalBox__button--next" onClick={handleNext}>Próximo</button>
       </div>
     </div>

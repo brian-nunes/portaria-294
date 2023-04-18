@@ -164,6 +164,10 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-bottom: 0;
 }
 
 .msg_erro {

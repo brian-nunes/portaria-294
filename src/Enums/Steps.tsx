@@ -4,7 +4,8 @@ export enum Steps{
     AskAdditionalData,
     AskMeasures,
     Calculation,
-    ShowResults
+    ShowResults,
+    Help
 }
 
 export default Steps;

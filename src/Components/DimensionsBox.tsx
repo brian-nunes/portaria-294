@@ -3,6 +3,7 @@ import "../styles/DimensionsBox.css"
 import { PlataformContext } from '../Context/PlataformContext';
 import Dimensions from '../Enums/Dimensions';
 import Steps from '../Enums/Steps';
+import HelpButton from './HelpButton';
 
 const DimensionsBox: React.FC = () => {
     const { setDimension, setStep } = useContext(PlataformContext);
@@ -27,7 +28,10 @@ const DimensionsBox: React.FC = () => {
                     <span>CxLxA</span>
                 </button>
             </div>
-            <p>Quantas dimensões relevantes o produto possui?</p>
+            <div className="container">
+                <p>Quantas dimensões relevantes o produto possui?</p>
+                <HelpButton/>
+            </div>
         </>
     );
 }
