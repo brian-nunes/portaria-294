@@ -40,7 +40,7 @@ const Measures: React.FC = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const csvData = reader.result as string;
-      _measures = csvData.trim().split('\n').map(row => row.split(','));
+      _measures = csvData.trim().split('\n').map(row => row.split(',')).map(row => row.map(n => n.trim()));
       callback(_measures);
     }
   
@@ -49,7 +49,7 @@ const Measures: React.FC = () => {
   
 
   const handleTextbox = () => {
-    let _measures: string[][] = textboxContent.trim().split('\n').map(row => row.split(','));
+    let _measures: string[][] = textboxContent.trim().split('\n').map(row => row.split(',')).map(row => row.map(n => n.trim()));
     return _measures;
   }
 

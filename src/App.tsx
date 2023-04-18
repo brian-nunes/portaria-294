@@ -23,8 +23,8 @@ const App: React.FC = () => {
 
   return (
     <div className="mainContainer">
-        {actualStep !== Steps.Help && <h1>Plataforma Alpha - Portaria nº 294</h1>}
-        {actualStep !== Steps.Help && <DataBox/>}
+        {step !== Steps.Help && <h1>Plataforma Alpha - Portaria nº 294</h1>}
+        {step !== Steps.Help && <DataBox/>}
         <div className="centralContainer">
           {step === Steps.AskDimensions && <DimensionsBox/>}
           {step === Steps.AskNominal && <NominalBox/>}
