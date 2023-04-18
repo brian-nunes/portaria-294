@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/portaria-294/static/css/main.7cd3d5cb.css",
+    "main.css": "/portaria-294/static/css/main.a4863b18.css",
     "main.js": "/portaria-294/static/js/main.8f2644f7.js",
     "index.html": "/portaria-294/index.html",
-    "main.7cd3d5cb.css.map": "/portaria-294/static/css/main.7cd3d5cb.css.map",
+    "main.a4863b18.css.map": "/portaria-294/static/css/main.a4863b18.css.map",
     "main.8f2644f7.js.map": "/portaria-294/static/js/main.8f2644f7.js.map"
   },
   "entrypoints": [
-    "static/css/main.7cd3d5cb.css",
+    "static/css/main.a4863b18.css",
     "static/js/main.8f2644f7.js"
   ]
 }
