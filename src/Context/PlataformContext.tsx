@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import Steps from "../Enums/Steps";
 import Dimensions from "../Enums/Dimensions";
+import { forEach } from "mathjs";
 
 export interface PlataformContextType {
   step: Steps;
@@ -12,6 +13,7 @@ export interface PlataformContextType {
   sample: number;
   multiplier: number;
   approved: boolean;
+  errors: string[];
   setStep: (s: Steps) => void;
   setDimension: (d: Dimensions) => void;
   setMeasures: (m: number[][]) => void;
@@ -32,6 +34,7 @@ export const PlataformContext = createContext<PlataformContextType>({
   sample: 0,
   multiplier: 1,
   approved: false,
+  errors: [],
   setStep: () => {},
   setDimension: () => {},
   setMeasures: () => {},
@@ -57,6 +60,7 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
     const [multiplier, setMultiplier] = useState<number>(1);
     const [k, setK] = useState<number>(1);
     const [approved, setApproved] = useState<boolean>(false);
+    const [errors, setErrors] = useState<string[]>([]);
 
     useEffect(() => {
       const faixas = process.env.REACT_APP_FAIXAS_LOTES?.split(",") || [];
@@ -100,7 +104,7 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       return Math.sqrt(avgSquareDiff);
     }
     
-    const calculateData = (m: number[], nominal: number) => {
+    const calculateData = (m: number[], nominal: number, whichNominals: number[]) => {
       const average: number = calculateAverage(m);
       const S: number = calculateStandardDeviation(m, average);
       const individualGoal: number = process.env.REACT_APP_TOLERANCIA_INDIVIDUAL !== undefined ? +process.env.REACT_APP_TOLERANCIA_INDIVIDUAL : 0;
@@ -109,6 +113,27 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       const individuallyApproved: boolean = m.every(measure => measure >= individualLimit);
       const ApprovedImprecision: boolean = imprecision < 0.2*nominal*individualGoal;
 
+      let part: string = "";
+      if (whichNominals.length === 1) {
+        part = (whichNominals[0] === 0) ? "o tamanho do comprimento" : ((whichNominals[0] === 1) ? "o tamanho da largura" : "o tamanho da altura")
+      } else if (whichNominals.length === 2) {
+        part = (whichNominals[0] === 0 && whichNominals[1] === 1) ? "A área formada por comprimento e largura" : ((whichNominals[0] === 0 && whichNominals[1] === 2) ? "A área formada por comprimento e altura" : "A área formada por largura e altura") 
+      } else {
+        part = "o volume"
+      }
+      if (!averageApproved) {
+        errors.push("Média d" + part.toLowerCase() + " está abaixo do limite mínimo de " + (nominal - (k*S)))
+      }
+      if (!individuallyApproved) {
+        const indivErrados: number[] = m.filter(measure => measure < individualLimit);
+        forEach(indivErrados, (measure) => {
+          errors.push(part + " "+ measure + " está abaixo do limite individual de " + individualLimit)
+        })
+      }
+      if (!ApprovedImprecision) {
+        errors.push("Imprecisão do instrumento(" + imprecision + ") é alta demais para " + part.toLowerCase() + "(máx.: " + (0.2*nominal*individualGoal) + ")")
+      }
+
       return averageApproved && individuallyApproved && ApprovedImprecision;
     }
 
@@ -116,7 +141,7 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       const _measures = measures[whichNominal];
       const nominalValue: number = measuresNominal[whichNominal];
 
-      return calculateData(_measures, nominalValue);
+      return calculateData(_measures, nominalValue, [whichNominal]);
     }
 
     const calculateTwoDimensions = (whichNominalA: number, whichNominalB: number) => {
@@ -127,7 +152,7 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       }
       const nominalArea = measuresNominal[whichNominalA] * measuresNominal[whichNominalB];
 
-      return calculateData(_measures, nominalArea);
+      return calculateData(_measures, nominalArea, [whichNominalA, whichNominalB]);
     }
 
     const calculateThreeDimensions = () => {
@@ -138,19 +163,26 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       }
       const volumeNominal = measuresNominal[0] * measuresNominal[1] * measuresNominal[2];
 
-      return calculateData(_measures, volumeNominal);
+      return calculateData(_measures, volumeNominal, [0, 1, 2]);
     }
 
     const calculate = () => {
-      let approved: boolean = false;
       if (dimension === Dimensions.C) {
-        approved =  calculateOneDimension(0)
+        calculateOneDimension(0)
       } else if (dimension === Dimensions.CL) {
-        approved = calculateOneDimension(0) && calculateOneDimension(1) && calculateTwoDimensions(0, 1)
+        calculateTwoDimensions(0, 1)
+        calculateOneDimension(0)
+        calculateOneDimension(1)
       } else {
-        approved = calculateOneDimension(0) && calculateOneDimension(1) && calculateOneDimension(2) && calculateTwoDimensions(0, 1) && calculateTwoDimensions(1, 2) && calculateTwoDimensions(0, 2) && calculateThreeDimensions()
+        calculateThreeDimensions()
+        calculateTwoDimensions(0, 1)
+        calculateTwoDimensions(1, 2)
+        calculateTwoDimensions(0, 2)
+        calculateOneDimension(0)
+        calculateOneDimension(1)
+        calculateOneDimension(2)
       }
-      setApproved(approved);
+      setApproved(errors.length === 0);
       setStep(Steps.ShowResults);
       console.log("New step: ShowResults");
     }
@@ -166,10 +198,11 @@ export const PlataformProvider = ({ children }: PlataformProviderProps) => {
       setMultiplier(1);
       setK(1);
       setApproved(false);
+      setErrors([]);
     }
 
     return (
-        <PlataformContext.Provider value={{ step, dimension, measures, measuresNominal, faixaLote, imprecision, sample, multiplier, approved, setStep, setDimension, setMeasures, setMeasuresNominal, setFaixaLote, setImprecision, calculate, cleanUp }}>
+        <PlataformContext.Provider value={{ step, dimension, measures, measuresNominal, faixaLote, imprecision, sample, multiplier, approved, errors, setStep, setDimension, setMeasures, setMeasuresNominal, setFaixaLote, setImprecision, calculate, cleanUp }}>
             {children}
         </PlataformContext.Provider>
     );

@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainContainer">
-        {step !== Steps.Help && <h1>Plataforma Alpha - Portaria nº 294</h1>}
+        {step !== Steps.Help && <h1>Plataforma Beta - Portaria nº 294</h1>}
         {step !== Steps.Help && <DataBox/>}
         <div className="centralContainer">
           {step === Steps.AskDimensions && <DimensionsBox/>}
